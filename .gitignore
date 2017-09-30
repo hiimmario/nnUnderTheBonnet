@@ -1,4 +1,4 @@
 .idea
 image_data/mnist_dataset/mnist_train.csv
 image_data/mnist_dataset/mnist_test.csv
-weights_json/mnist/*
+__pycache__

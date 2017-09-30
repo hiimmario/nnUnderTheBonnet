@@ -120,7 +120,6 @@ class NeuralNetwork:
 
         with io.open(path_wih, 'w', encoding='utf8') as outfile:
             json.dump(wih_list, outfile, indent=4)
-
     pass
 
     # loads the weights into json files
