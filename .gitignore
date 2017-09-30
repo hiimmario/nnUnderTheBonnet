@@ -2,3 +2,6 @@
 image_data/mnist_dataset/mnist_train.csv
 image_data/mnist_dataset/mnist_test.csv
 __pycache__
+whiskey_bottles.py
+image_data/whiskey_bottles/*
+weights_json/whiskey_bottles/*
