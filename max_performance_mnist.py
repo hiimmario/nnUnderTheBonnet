@@ -16,7 +16,7 @@ learning_rate = 0.2
 n = nn.NeuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 
 # load the mnist training data CSV file into a list
-training_data_file = open("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/image_data/mnist_dataset/mnist_train.csv",
+training_data_file = open("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/image_data/mnist_dataset/mnist_train_100.csv",
                           'r')
 training_data_list = training_data_file.readlines()
 training_data_file.close()
@@ -24,7 +24,7 @@ training_data_file.close()
 # train the neural network
 
 # epochs is the number of times the training data set is used for training
-epochs = 1
+epochs = 7
 
 for index_epochs, e in enumerate(range(epochs)):
     # go through all records in the training data set
