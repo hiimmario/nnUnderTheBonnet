@@ -15,7 +15,9 @@ It is a good database for people who want to try learning
 techniques and pattern recognition methods on real-world data while 
 spending minimal efforts on preprocessing and formatting.
 
-performance: ~93% accuracy
+performance: ~96% accuracy
+i never trained all 50k pictures for more then a few epochs, my computer is simply to slow
+with tensorflow i will outsource the script on the gpu with tensor gpu
 
 
 

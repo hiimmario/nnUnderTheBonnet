@@ -16,7 +16,7 @@ learning_rate = 0.2
 n = nn.NeuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 
 # load the mnist training data CSV file into a list
-training_data_file = open("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/image_data/mnist_dataset/mnist_train_100.csv",
+training_data_file = open("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/mnist/mnist_dataset/mnist_train.csv",
                           'r')
 training_data_list = training_data_file.readlines()
 training_data_file.close()
@@ -24,7 +24,7 @@ training_data_file.close()
 # train the neural network
 
 # epochs is the number of times the training data set is used for training
-epochs = 12
+epochs = 10
 
 for index_epochs, e in enumerate(range(epochs)):
     # go through all records in the training data set
@@ -48,15 +48,20 @@ for index_epochs, e in enumerate(range(epochs)):
         inputs_minusx_img = scipy.ndimage.interpolation.rotate(inputs.reshape(28, 28), -10, cval=0.01, order=1,
                                                                reshape=False)
         n.train(inputs_minusx_img.reshape(784), targets)
+
+        if index_records == 10000:
+            break
         pass
 
     # store the model
     n.store_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/mnist/who_" + str(index_epochs) + ".json",
                   "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/mnist/wih_" + str(index_epochs) + ".json")
+
+    print("epoch done ... model stored")
     pass
 
 # load the mnist test data CSV file into a list
-test_data_file = open("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/image_data/mnist_dataset/mnist_test_10.csv", 'r')
+test_data_file = open("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/mnist/mnist_dataset/mnist_test.csv", 'r')
 test_data_list = test_data_file.readlines()
 test_data_file.close()
 
@@ -90,6 +95,9 @@ for index_epochs, e in enumerate(range(epochs)):
             # network's answer doesn't match correct answer, add 0 to scorecard
             scorecard.append(0)
             pass
+
+        if index_records == 2000:
+            break
         pass
 
     # calculate the performance score, the fraction of correct answers
