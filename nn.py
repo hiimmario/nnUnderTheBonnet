@@ -4,6 +4,8 @@ import scipy.special
 # json and io for load and store the model in json files
 import json
 import io
+import matplotlib.pyplot
+import math
 
 # neural network class definition
 class NeuralNetwork:
@@ -62,7 +64,7 @@ class NeuralNetwork:
         pass
 
     # query the neural network
-    def query(self, inputs_list):
+    def query(self, inputs_list, b_plot = False):
         # convert inputs list to 2d array
         inputs = numpy.array(inputs_list, ndmin=2).T
 
@@ -70,6 +72,12 @@ class NeuralNetwork:
         hidden_inputs = numpy.dot(self.wih, inputs)
         # calculate the signals emerging from hidden layer
         hidden_outputs = self.activation_function(hidden_inputs)
+
+        # plot hidden_outputs
+        if b_plot:
+            matplotlib.pyplot.imshow(hidden_outputs.reshape(int(math.sqrt(self.hnodes)), int(math.sqrt(self.hnodes))),
+                                     cmap='Greys', interpolation='None')
+            matplotlib.pyplot.show()
 
         # calculate signals into final output layer
         final_inputs = numpy.dot(self.who, hidden_outputs)

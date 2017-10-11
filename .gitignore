@@ -1,7 +1,19 @@
+# pycharm project files
 .idea
-image_data/mnist_dataset/mnist_train.csv
-image_data/mnist_dataset/mnist_test.csv
+
+# bottles
+whiskey_bottles/all_bottles
+
+# cifar10
+cifar10/batches
+
+# mnist
+mnist/mnist_dataset/mnist_test.csv
+mnist/mnist_dataset/mnist_train.csv
+
+# weights
+weights_json
+
+
 __pycache__
 whiskey_bottles.py
-image_data/whiskey_bottles/*
-weights_json/whiskey_bottles/*
