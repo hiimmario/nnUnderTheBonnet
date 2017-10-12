@@ -82,7 +82,7 @@ for index_epochs, e in enumerate(range(epochs)):
         print(str(index) + " ... label: " + str(train_labels[index]) + " trained!")
         inputs = []
 
-        if index == 1050:
+        if index == 1000:
             break
 
     # store the model

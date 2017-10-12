@@ -37,7 +37,7 @@ The training batches contain the remaining images in random order, but some trai
 contain more images from one class than another. 
 Between them, the training batches contain exactly 5000 images from each class. 
 
-performance: ~25%
+performance: ~27%
 at least it is double as good as randomly choosing a category ^^
 this very simple neural net is already struggling with this problem.
 ill use this dataset to get my first steps in tensorflow/keras done, where i hopefully will

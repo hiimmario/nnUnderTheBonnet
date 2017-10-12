@@ -21,11 +21,13 @@ n = nn.NeuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 print("init neural net: ", datetime.now() - startTime)
 
 # epochs is the number of times the training data set is used for training
-epochs = 1
+epochs = 5
 
 for index_epochs, e in enumerate(range(epochs)):
+    print("lol")
     # load the image data as test data set and train the neural net
-    for index, image_file_name in enumerate(glob.glob("image_data/whiskey_bottles/bottles_training_sub/*")):
+    for index, image_file_name in enumerate(glob.glob("whiskey_bottles/bottles_training_sub/*")):
+        print("qwer")
         label = int(image_file_name[48:49])
         img_array = scipy.misc.imread(image_file_name, flatten=True)
         img_data = 255.0 - img_array.reshape(100000)
@@ -38,25 +40,22 @@ for index_epochs, e in enumerate(range(epochs)):
         pass
 
     # store the model
-    # n.store_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/who_" + str(index_epochs) + ".json",
-    #               "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/wih_" + str(index_epochs) + ".json")
+    n.store_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/who_" + str(index_epochs) + ".json",
+                  "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/wih_" + str(index_epochs) + ".json")
     pass
     print(index_epochs)
 
+# scorecard for how well the network performs
 scorecard = []
 
 # test the neural net with all stored models
 for index_epochs, e in enumerate(range(epochs)):
 
-    # scorecard for how well the network performs
-
-
     # load model from json file
-    # n.load_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/who_" + str(index_epochs) + ".json",
-    #              "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/wih_" + str(index_epochs) + ".json")
+    n.load_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/who_" + str(index_epochs) + ".json",
+                 "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/wih_" + str(index_epochs) + ".json")
 
-
-    for index, image_file_name in enumerate(glob.glob("image_data/whiskey_bottles/bottles_testset_sub_/*")):
+    for index, image_file_name in enumerate(glob.glob("whiskey_bottles/bottles_testset_sub_/*")):
 
         label = int(image_file_name[48:49])
         img_array = scipy.misc.imread(image_file_name, flatten=True)
