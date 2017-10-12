@@ -15,6 +15,11 @@ learning_rate = 0.2
 # create instance of neural network
 n = nn.NeuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 
+# load model from json file
+n.load_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/mnist/who_3.json",
+             "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/mnist/wih_3.json")
+
+
 # load the mnist training data CSV file into a list
 training_data_file = open("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/mnist/mnist_dataset/mnist_train.csv",
                           'r')
@@ -24,7 +29,7 @@ training_data_file.close()
 # train the neural network
 
 # epochs is the number of times the training data set is used for training
-epochs = 10
+epochs = 4
 
 for index_epochs, e in enumerate(range(epochs)):
     # go through all records in the training data set
@@ -49,7 +54,7 @@ for index_epochs, e in enumerate(range(epochs)):
                                                                reshape=False)
         n.train(inputs_minusx_img.reshape(784), targets)
 
-        if index_records == 10000:
+        if index_records == 40000:
             break
         pass
 
@@ -57,7 +62,7 @@ for index_epochs, e in enumerate(range(epochs)):
     n.store_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/mnist/who_" + str(index_epochs) + ".json",
                   "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/mnist/wih_" + str(index_epochs) + ".json")
 
-    print("epoch done ... model stored")
+    print(index_epochs, ". epoch done ... model stored")
     pass
 
 # load the mnist test data CSV file into a list
@@ -76,7 +81,7 @@ for index_epochs, e in enumerate(range(epochs)):
                  "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/mnist/wih_" + str(index_epochs) + ".json")
 
     # go through all the records in the test data set
-    for record in test_data_list:
+    for index_records, record in enumerate(test_data_list):
         # split the record by the ',' commas
         all_values = record.split(',')
         # correct answer is first value
@@ -96,7 +101,7 @@ for index_epochs, e in enumerate(range(epochs)):
             scorecard.append(0)
             pass
 
-        if index_records == 2000:
+        if index_records == 6000:
             break
         pass
 

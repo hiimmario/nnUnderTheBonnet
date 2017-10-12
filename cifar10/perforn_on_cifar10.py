@@ -2,6 +2,8 @@ import numpy as np
 import pickle
 import nn
 
+import matplotlib.pyplot
+
 def unpickle(file):
     # Load byte data from file
     with open(file, 'rb') as f:
@@ -38,9 +40,12 @@ def load_cifar10_data(data_dir):
     return train_data, train_labels, test_data, test_labels
 
 
-data_dir = "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/image_data/cifar10/"
+data_dir = "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/cifar10/batches/"
 train_data, train_labels, test_data, test_labels = load_cifar10_data(data_dir)
 
+# plot a test picture from te cifar 10 dataset after unpacking the batches
+# matplotlib.pyplot.imshow(train_data[0])
+# matplotlib.pyplot.show()
 
 # number of input, hidden and output nodes
 input_nodes = 3072
@@ -56,25 +61,29 @@ n = nn.NeuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 
 inputs = []
 
-# n.load_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/cifar10/who_0.json",
-             # "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/cifar10/wih_0.json")
+# n.load_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/cifar10/who_1.json",
+#              "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/cifar10/wih_1.json")
 
 
-epochs = 2
+epochs = 5
 
+# preparing the rgb picture 32*32*3 for the input - 1d vector with 0.01-1 floating point number
 for index_epochs, e in enumerate(range(epochs)):
     for index, p in enumerate(train_data):
         for r in p:
             for i in r:
-                for e in i:
-                    e = (e / 255.0 * 0.99) + 0.01
-                    inputs.append(e)
+                for rec in i:
+                    rec = (rec / 255.0 * 0.99) + 0.01
+                    inputs.append(rec)
 
         targets = np.zeros(output_nodes) + 0.01
         targets[train_labels[index]] = 0.99
         n.train(inputs, targets)
         print(str(index) + " ... label: " + str(train_labels[index]) + " trained!")
         inputs = []
+
+        if index == 1050:
+            break
 
     # store the model
     n.store_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/cifar10/who_" + str(index_epochs) + ".json",
@@ -110,6 +119,8 @@ for index_epochs, e in enumerate(range(epochs)):
 
         inputs = []
 
+        if index == 100:
+            break
+
     scorecard_array = np.asarray(scorecard)
     print("performance model " + str(index_epochs) + ": " + str(scorecard_array.sum() / scorecard_array.size))
-
