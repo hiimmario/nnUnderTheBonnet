@@ -21,14 +21,12 @@ n = nn.NeuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 print("init neural net: ", datetime.now() - startTime)
 
 # epochs is the number of times the training data set is used for training
-epochs = 5
+epochs = 3
 
 for index_epochs, e in enumerate(range(epochs)):
-    print("lol")
     # load the image data as test data set and train the neural net
-    for index, image_file_name in enumerate(glob.glob("whiskey_bottles/bottles_training_sub/*")):
-        print("qwer")
-        label = int(image_file_name[48:49])
+    for index, image_file_name in enumerate(glob.glob("bottles_training_sub/*")):
+        label = int(image_file_name[21:22])
         img_array = scipy.misc.imread(image_file_name, flatten=True)
         img_data = 255.0 - img_array.reshape(100000)
         img_data = (img_data / 255.0 * 0.99) + 0.01
@@ -38,6 +36,9 @@ for index_epochs, e in enumerate(range(epochs)):
 
         print("[", index, "]", image_file_name, " ... min: ", numpy.min(img_data), " ... max: ", numpy.max(img_data))
         pass
+
+        if index == 100:
+            break
 
     # store the model
     n.store_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/who_" + str(index_epochs) + ".json",
@@ -55,9 +56,9 @@ for index_epochs, e in enumerate(range(epochs)):
     n.load_model("C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/who_" + str(index_epochs) + ".json",
                  "C:/Users/Mario/PycharmProjects/nnUnderTheBonnet/weights_json/whiskey_bottles/wih_" + str(index_epochs) + ".json")
 
-    for index, image_file_name in enumerate(glob.glob("whiskey_bottles/bottles_testset_sub_/*")):
+    for index, image_file_name in enumerate(glob.glob("bottles_testset_sub_/*")):
 
-        label = int(image_file_name[48:49])
+        label = int(image_file_name[21:22])
         img_array = scipy.misc.imread(image_file_name, flatten=True)
         img_data = 255.0 - img_array.reshape(100000)
         img_data = (img_data / 255.0 * 0.99) + 0.01
@@ -80,6 +81,9 @@ for index_epochs, e in enumerate(range(epochs)):
             pass
 
         pass
+
+        if index == 25:
+            break
     pass
 
     # calculate the performance score, the fraction of correct answers
