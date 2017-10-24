@@ -1,5 +1,6 @@
 # pycharm project files
 .idea
+__pycache__
 
 # bottles
 whiskey_bottles/all_bottles
